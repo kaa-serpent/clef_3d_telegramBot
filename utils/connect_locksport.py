@@ -8,6 +8,7 @@ import json
 
 def parse_research(driver: object):
     """Function that parses the result of research on locksport.fr"""
+    print("parsing results...")
     prettify_data = ""
     title = driver.find_elements(By.CLASS_NAME, "searchresults-title")[0].text
 
@@ -20,6 +21,7 @@ def parse_research(driver: object):
 
 def research(driver: object, str_to_research: str):
     """Function that research on locksport.fr"""
+    print("researching...")
     driver.get("https://www.locksport.fr/search.php")
 
     terme_search = driver.find_element(By.ID, 'keywords')
@@ -53,12 +55,12 @@ def login(message=None):
     login_url = 'https://www.locksport.fr/ucp.php?mode=login'
     driver.get(login_url)
 
-    # accept cookies
+    print("accepting cookies...")
     cookies_button = driver.find_element(By.CLASS_NAME, 'cc-btn cc-dismiss')
     cookies_button.click()
     WebDriverWait(driver, 10)
 
-    # fill in the login form and submit it
+    print("logging in...")
     username_input = driver.find_element(By.ID, 'username')
     password_input = driver.find_element(By.ID, 'password')
     submit_button = driver.find_element(By.NAME, 'login')
