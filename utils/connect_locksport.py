@@ -6,9 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 
 
-def loggin_lock(search=None):
+def loggin(search=None):
 
-    with open('credentials.json') as f:
+    with open('../credentials.json') as f:
         data = json.load(f)
         username = data['LOCKSPORT_USERNAME']
         password = data['LOCKSPORT_PASSWORD']
@@ -44,3 +44,12 @@ def loggin_lock(search=None):
     driver.quit()
 
     return "ok"
+
+
+def search(search=None):
+    """Function that searches for a specific lock on Locksport.fr"""
+    if search is None:
+        return ["Pas de mot à rechercher fournis"]
+    result = loggin(search)
+    print(result)
+    return "end of search_on_locksport"

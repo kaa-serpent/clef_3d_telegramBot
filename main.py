@@ -1,12 +1,9 @@
 import time
-
 import requests
 import json
 import os
-import threading
-from bs4 import BeautifulSoup
-
-import connect
+import utils.telegram_bot as bot
+from utils import connect_locksport as locksport
 
 # get credential from json file
 with open('credentials.json') as f:
@@ -16,40 +13,6 @@ with open('credentials.json') as f:
     LOCKSPORT_PASSWORD = data['LOCKSPORT_PASSWORD']
 
 s = requests.Session()
-
-
-def telegram_bot_sendtext(bot_message, chat_id, msg_id):
-    """Function that sends a message to a specific telegram group"""
-    data = {
-        'chat_id': chat_id,
-        'text': bot_message,
-        'reply_to_message_id': msg_id
-    }
-    response = requests.post(
-        'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage',
-        json=data
-    )
-    return response.json()
-
-
-def telegram_bot_sendimage(image_url, group_id, msg_id):
-    """Function that sends an image to a specific telegram group"""
-    data = {
-        'chat_id': group_id,
-        'photo': image_url,
-        'reply_to_message_id': msg_id
-    }
-    url = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendPhoto'
-
-    response = requests.post(url, data=data)
-    return response.json()
-
-
-def search_on_locksport(search):
-    """Function that searches for a specific lock on Locksport.fr"""
-    result = connect.loggin_lock(search)
-    print(result)
-    return "end of search_on_locksport"
 
 
 def Chatbot():
@@ -87,23 +50,23 @@ def Chatbot():
 
                     if '/help' in result['message']['text']:
                         bot_response = "Hi, I am ChikaaGPT, I am a chatbot that uses OpenAI to generate responses. \n\n - /gpt generate a text response from me \n - /img generate an image from the provided text \n\n I am still learning so please be patient with me."
-                        print(telegram_bot_sendtext(bot_response, chat_id, msg_id))
+                        print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     if '/cle' or '/clef' or '/clé' in result['message']['text']:
                         prompt = result['message']['text'].replace("/cle", "").replace("/clef", "").replace("/clé", "")
-                        result = search_on_locksport(prompt)
-                        print(telegram_bot_sendtext(result, chat_id, msg_id))
+                        result = locksport.search_on_locksport(prompt)
+                        print(bot.telegram_bot_sendtext(result, chat_id, msg_id))
 
                     if 'lp' in result['message']['text']:
                         prompt = result['message']['text'].replace("lp", "")
                         bot_response = "https://www.youtube.com/@lockpickinglawyer/search?query=" + prompt
-                        print(telegram_bot_sendtext(bot_response, chat_id, msg_id))
+                        print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     # Checking if user wants an image
                     if '/img' in result['message']['text']:
                         prompt = result['message']['text'].replace("/img", "")
                         bot_response = openAImage(prompt)
-                        print(telegram_bot_sendimage(bot_response, chat_id, msg_id))
+                        print(bot.telegram_bot_sendimage(bot_response, chat_id, msg_id))
 
         except Exception as e:
             print(e)
