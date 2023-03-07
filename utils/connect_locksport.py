@@ -82,8 +82,6 @@ def search(message=None):
         return "Pas de mot(s) a rechercher fourni(s)"
     driver = login(message)
     driver = research(driver, message)
-    prettify_data = parse_research(driver)
-
-    print(prettify_data)
+    driver, prettify_data = parse_research(driver)
     driver.quit()
     return prettify_data
