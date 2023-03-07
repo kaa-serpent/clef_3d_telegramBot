@@ -1,6 +1,5 @@
 import json
 import requests
-import telegram
 
 # read credential json
 with open('credentials.json') as f:
