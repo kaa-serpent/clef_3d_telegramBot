@@ -6,17 +6,44 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 
 
-def parse_research(driver: object):
-    """Function that parses the result of research on locksport.fr"""
-    print("parsing results...")
-    prettify_data = ""
-    title = driver.find_elements(By.CLASS_NAME, "searchresults-title")[0].text
-
-    prettify_data += "**" + title + "** \n\n"
+def get_post_title_on_page(driver, prettify_data, count_title):
+    # parse the posts titles
+    list_titles = []
     for article in driver.find_elements(By.CLASS_NAME, "postbody"):
         title_article = article.find_element(By.TAG_NAME, "h3")
-        prettify_data += "-> " + title_article.text + "\n"
-    return driver, prettify_data
+        list_titles.append(str(count_title) + "-> " + title_article.text + "\n")
+        count_title += 1
+    prettify_data += "".join(list_titles)
+    return prettify_data, count_title
+
+
+def parse_title_research(driver: object):
+    """Function that parses the result of research on locksport.fr"""
+    print("parsing results...")
+    count_title = 1
+    prettify_titles = ""
+    title = driver.find_elements(By.CLASS_NAME, "searchresults-title")[0].text
+
+    prettify_titles = "**" + title + "** \n\n"
+    prettify_titles, count_title = get_post_title_on_page(driver, prettify_titles, count_title)  # page 1
+
+    # loop through the pages
+    while True:
+        # check if there is a next page button
+        next_page_button = driver.find_elements(By.XPATH,
+                                                "//li[@class='arrow next']/a[@class='button button-icon-only' and @rel='next']")
+        if not next_page_button:
+            print("no more pages to click")
+            break
+        # click the next page button
+        next_page_button[0].click()
+
+        # wait for the page to load
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "phpbb")))
+
+        prettify_titles, count_title = get_post_title_on_page(driver, prettify_titles, count_title)
+
+    return driver, prettify_titles
 
 
 def research(driver: object, str_to_research: str):
@@ -40,7 +67,6 @@ def research(driver: object, str_to_research: str):
 
 
 def login(message=None):
-
     with open('credentials.json') as f:
         data = json.load(f)
         username = data['LOCKSPORT_USERNAME']
@@ -82,6 +108,6 @@ def search(message=None):
         return "Pas de mot(s) a rechercher fourni(s)"
     driver = login(message)
     driver = research(driver, message)
-    driver, prettify_data = parse_research(driver)
+    driver, prettify_data = parse_title_research(driver)
     driver.quit()
     return prettify_data
