@@ -2,6 +2,8 @@ import time
 import requests
 import json
 import os
+
+import utils.telegram_bot
 import utils.telegram_bot as bot
 from utils import connect_locksport as locksport
 
@@ -26,7 +28,7 @@ def chatbot():
         with open(filename, "w") as f:
             f.write("1")
     else:
-        print("File Exists")
+        print("last message id file exists.")
 
     with open(filename) as f:
         last_update = f.read()
@@ -51,23 +53,23 @@ def chatbot():
                     if '/help' in result['message']['text']:
                         bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
                                        "-`/lpl` recherche dans les vidéos de la chaine youtube lockpickingLawyer (marche sur pc) \n " \
-                                       "-`/locksport` recherche sur locksport \n\n en cours de réalisation"
+                                       "-`/locksport` recherche les titres sur locksport \n\n" \
+                                       "- '/title' titre de l'article à consulter sur locksport, renvoie un screen shot par réponse dans la discussion" \
+                                       " en cours de réalisation"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     if '/locksport' in result['message']['text']:
                         result = locksport.search(result['message']['text'].replace("/locksport", ""))
-                        print(bot.telegram_bot_sendtext(result, chat_id, msg_id))
+                        bot.telegram_bot_sendtext(result, chat_id, msg_id)
+
+                    if '/title' in result['message']['text']:
+                        locksport.title_article(result['message']['text'].replace("/title", ""))
+                        utils.telegram_bot.send_screenshots(chat_id, msg_id)
 
                     if '/lpl' in result['message']['text']:
                         prompt = result['message']['text'].replace("/lpl ", "").replace("/lpl", "")
                         bot_response = "https://www.youtube.com/@lockpickinglawyer/search?query=" + prompt
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
-
-                    # Checking if user wants an image
-                    if '/img' in result['message']['text']:
-                        prompt = result['message']['text'].replace("/img", "")
-                        bot_response = openAImage(prompt)
-                        print(bot.telegram_bot_sendimage(bot_response, chat_id, msg_id))
 
         except Exception as e:
             print(e)
