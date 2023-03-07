@@ -48,7 +48,7 @@ def login(message=None):
 
     # set up a Firefox webdriver with headless mode enabled
     firefox_options = Options()
-    firefox_options.headless = False
+    firefox_options.headless = True  # comment this line to see the browser in action
     driver = webdriver.Firefox(options=firefox_options)
 
     # navigate to the login page
