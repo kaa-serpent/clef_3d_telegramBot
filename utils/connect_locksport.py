@@ -128,6 +128,8 @@ def title_article(message=None):
     """Function that searches for a specific topic on Locksport.fr"""
     if message == '':
         return "Pas de mot(s) a rechercher fourni(s)"
+    else:
+        print("searching for " + message)
     driver = login()
     driver = research(driver, message)
 
