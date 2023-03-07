@@ -15,7 +15,7 @@ with open('credentials.json') as f:
 s = requests.Session()
 
 
-def Chatbot():
+def chatbot():
     """
     Function that retrieves the latest requests from users in a Telegram group,
     generates a response, and sends the response back to the group.
@@ -49,16 +49,17 @@ def Chatbot():
                     chat_id = str(result['message']['chat']['id'])
 
                     if '/help' in result['message']['text']:
-                        bot_response = "Hi, I am ChikaaGPT, I am a chatbot that uses OpenAI to generate responses. \n\n - /gpt generate a text response from me \n - /img generate an image from the provided text \n\n I am still learning so please be patient with me."
+                        bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
+                                       "-`/lpl` recherche dans les vidéos de la chaine youtube lockpickingLawyer (marche sur pc) \n " \
+                                       "-`/locksport` recherche sur locksport \n\n en cours de réalisation"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
-                    if '/cle' or '/clef' or '/clé' in result['message']['text']:
-                        prompt = result['message']['text'].replace("/cle", "").replace("/clef", "").replace("/clé", "")
-                        result = locksport.search_on_locksport(prompt)
+                    if '/locksport' in result['message']['text']:
+                        result = locksport.search(result['message']['text'].replace("/locksport", ""))
                         print(bot.telegram_bot_sendtext(result, chat_id, msg_id))
 
-                    if 'lp' in result['message']['text']:
-                        prompt = result['message']['text'].replace("lp", "")
+                    if '/lpl' in result['message']['text']:
+                        prompt = result['message']['text'].replace("/lpl ", "").replace("/lpl", "")
                         bot_response = "https://www.youtube.com/@lockpickinglawyer/search?query=" + prompt
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
@@ -81,7 +82,7 @@ def Chatbot():
 def main():
     """Function that runs the Chatbot function every 5 seconds unless it is in call"""
     while True:
-        Chatbot()
+        chatbot()
         time.sleep(5)
 
 

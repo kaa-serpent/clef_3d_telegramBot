@@ -6,9 +6,21 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 
 
-def loggin(search=None):
+def parse_research(driver: object):
+    """Function that parses the result of research on locksport.fr"""
+    prettify_data = ""
+    title = driver.find_elements(By.CLASS_NAME, "searchresults-title")[0].text
 
-    with open('../credentials.json') as f:
+    prettify_data += "**" + title + "** \n\n"
+    for article in driver.find_elements(By.CLASS_NAME, "postbody"):
+        title_article = article.find_element(By.TAG_NAME, "h3")
+        prettify_data += "-> " + title_article.text + "\n"
+    return driver, prettify_data
+
+
+def login(message=None):
+
+    with open('credentials.json') as f:
         data = json.load(f)
         username = data['LOCKSPORT_USERNAME']
         password = data['LOCKSPORT_PASSWORD']
@@ -31,25 +43,33 @@ def loggin(search=None):
     submit_button.click()
 
     # wait for the login process to complete
-    WebDriverWait(driver, 100)
+    WebDriverWait(driver, 10)
 
     driver.get("https://www.locksport.fr/search.php")
 
     terme_search = driver.find_element(By.ID, 'keywords')
-    submit_search = driver.find_element(By.CLASS_NAME, "button1")
-    terme_search.send_keys(search)
-    submit_search.click()
-    WebDriverWait(driver, 100)
+    terme_title_only = driver.find_element(By.ID, 'sf3')
+    terme_search.send_keys(message)
+    terme_title_only.click()
+
+    submit_button = driver.find_element(By.CLASS_NAME, "button1")
+    # scroll to the submit button using JavaScript
+    driver.execute_script("arguments[0].scrollIntoView();", submit_button)
+
+    submit_button.click()
+    WebDriverWait(driver, 10)
     # close the webdriver when done
-    driver.quit()
 
-    return "ok"
+    driver, prettify_data = parse_research(driver)
+
+    return driver, prettify_data
 
 
-def search(search=None):
+def search(message=None):
     """Function that searches for a specific lock on Locksport.fr"""
-    if search is None:
-        return ["Pas de mot à rechercher fournis"]
-    result = loggin(search)
-    print(result)
-    return "end of search_on_locksport"
+    if message == '':
+        return ["Pas de mot a rechercher fournis"]
+    driver, prettify_data = login(message)
+    print(prettify_data)
+    driver.quit()
+    return prettify_data
