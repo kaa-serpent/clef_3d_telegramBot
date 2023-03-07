@@ -40,6 +40,8 @@ def login(message=None):
     submit_button = driver.find_element(By.NAME, 'login')
     username_input.send_keys(username)
     password_input.send_keys(password)
+
+    driver.execute_script("arguments[0].scrollIntoView();", submit_button)
     submit_button.click()
 
     # wait for the login process to complete
@@ -53,10 +55,11 @@ def login(message=None):
     terme_title_only.click()
 
     submit_button = driver.find_element(By.CLASS_NAME, "button1")
+
     # scroll to the submit button using JavaScript
     driver.execute_script("arguments[0].scrollIntoView();", submit_button)
-
     submit_button.click()
+
     WebDriverWait(driver, 10)
     # close the webdriver when done
 
