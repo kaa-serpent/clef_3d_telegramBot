@@ -56,7 +56,7 @@ def login(message=None):
     driver.get(login_url)
 
     print("accepting cookies...")
-    cookies_button = driver.find_element(By.CLASS_NAME, 'cc-btn cc-dismiss')
+    cookies_button = driver.find_element(By.CLASS_NAME, 'cc-btn')
     cookies_button.click()
     WebDriverWait(driver, 10)
 
