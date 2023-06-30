@@ -1,0 +1,88 @@
+import time
+import requests
+import json
+import os
+
+import utils.telegram_bot as bot
+import key_generator.fontaine5 as fontaine5
+
+# get credential from json file
+with open('credentials.json') as f:
+    data = json.load(f)
+    BOT_TOKEN = data['BOT_TOKEN']
+
+s = requests.Session()
+
+
+def chatbot():
+    """
+    Function that retrieves the latest requests from users in a Telegram group,
+    generates a response, and sends the response back to the group.
+    """
+    cwd = os.getcwd()
+    filename = cwd + '/lastupdate.txt'
+    if not os.path.exists(filename):
+        with open(filename, "w") as f:
+            f.write("1")
+    else:
+        print("last message id file exists.")
+
+    with open(filename) as f:
+        last_update = f.read()
+
+    # Check for new messages in Telegram group
+    url = f'https://api.telegram.org/bot{BOT_TOKEN}/getUpdates?offset={last_update}'
+    response = requests.get(url)
+    data = json.loads(response.content)
+
+    for result in data['result']:
+        try:
+            # Checking for new message
+            if float(result['update_id']) > float(last_update):
+                # Checking for new messages that did not come from chatGPT
+                if not result['message']['from']['is_bot']:
+                    last_update = str(int(result['update_id']))
+                    # Retrieving message ID of the sender of the request
+                    msg_id = str(int(result['message']['message_id']))
+                    # Retrieving the chat ID
+                    chat_id = str(result['message']['chat']['id'])
+
+                    if '/help' in result['message']['text']:
+                        bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
+                                       "-`/generate_fontaine5` Génération d'une clef fontaine 5 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5] dans le sens horraire ex : [4,6,2,0,4,8] séparé par une virgule\n " \
+                                       "-`/lpl` recherche sur la chaine youtube LockPickingLayer (seulement sur pc) \n\n" \
+                                       "- plus de générateurs de clefs a venir \n\n"
+                        print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
+
+                    if '/generate_fontaine5' in result['message']['text']:
+                        result = fontaine5.generate(result['message']['text'].replace("/generate_fontaine5", ""))
+                        # if result contains "fontaine5" then it is a valid response
+                        if 'fontaine5_file.stl' in result:
+                            bot.send_one_stl(result, chat_id, msg_id)
+                        else:
+                            bot.telegram_bot_sendtext(result, chat_id, msg_id)
+
+                    if '/lpl' in result['message']['text']:
+                        prompt = result['message']['text'].replace("/lpl ", "").replace("/lpl", "")
+                        bot_response = "https://www.youtube.com/@lockpickinglawyer/search?query=" + prompt
+                        print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
+
+        except Exception as e:
+            print(e)
+
+    # Updating file with last update ID
+    with open(filename, 'w') as f:
+        f.write(last_update)
+
+    return "done"
+
+
+def main():
+    """Function that runs the Chatbot function every 5 seconds unless it is in call"""
+    while True:
+        chatbot()
+        time.sleep(5)
+
+
+if __name__ == "__main__":
+    main()
