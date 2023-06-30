@@ -49,15 +49,23 @@ def chatbot():
 
                     if '/help' in result['message']['text']:
                         bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
-                                       "-`/generate_fontaine5` Génération d'une clef fontaine 5 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5] dans le sens horraire ex : [4,6,2,0,4,8] séparé par une virgule\n " \
+                                       "-`/fontaine5` Génération d'une clef fontaine 5 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules \n " \
+                                       "-`/dynaxis` Génération d'une clef dynaxis 7 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5,6,7 en mm] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules\n " \
                                        "-`/lpl` recherche sur la chaine youtube LockPickingLayer (seulement sur pc) \n\n" \
                                        "- plus de générateurs de clefs a venir \n\n"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
-                    if '/generate_fontaine5' in result['message']['text']:
-                        result = fontaine5.generate(result['message']['text'].replace("/generate_fontaine5", ""))
+                    if '/fontaine5' in result['message']['text']:
+                        result = fontaine5.generate(result['message']['text'].replace("/fontaine5", ""))
                         # if result contains "fontaine5" then it is a valid response
                         if 'fontaine5_file.stl' in result:
+                            bot.send_one_stl(result, chat_id, msg_id)
+                        else:
+                            bot.telegram_bot_sendtext(result, chat_id, msg_id)
+
+                    if '/dynaxis' in result['message']['text']:
+                        result = fontaine5.generate(result['message']['text'].replace("/dynaxis", ""))
+                        if 'dynaxis_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)

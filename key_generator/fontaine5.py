@@ -1,8 +1,6 @@
 import subprocess
 import os
 
-from utils import telegram_bot as telegram_bot
-
 
 def generate(message: str) -> str:
     """Function that generates a key from a given message"""
