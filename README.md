@@ -9,6 +9,18 @@ The process is both simple and fascinating. Users interact with the Clef 3D Tele
 For example, if a user desires a key with the cut "3,5,6,3,1," they would send the following command to the bot: `/fontaine 3,5,6,3,1`
 The moment the command is sent, the Clef 3D TelegramBot springs into action. Leveraging advanced algorithms and intricate design patterns, the bot rapidly generates a precise 3D model of the requested key. Once the generation process is complete, the bot promptly sends the stunning 3D representation of the key back to the user within the same Telegram discussion.
 
+### Key available
+
+- [x] dynaxis
+- [ ] fontaine
+  - [x] fontaine 5
+  - [ ] fontaine 7
+- [ ] polux
+  - [ ] polux 5
+  - [ ] polux 7
+     
+I am curently working on this feel free to send key request.
+
 ### Features
 Intuitive and easy-to-use interface on Telegram.
 Swift and efficient key generation process.
