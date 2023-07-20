@@ -12,12 +12,11 @@ The moment the command is sent, the Clef 3D TelegramBot springs into action. Lev
 ### Key available
 
 - [x] dynaxis
-- [ ] fontaine
-  - [x] fontaine 5
-  - [ ] fontaine 7
+- [x] fontaine 5
 - [ ] polux
   - [ ] polux 5
   - [ ] polux 7
+- [ ] Laperche Rols
      
 I am curently working on this feel free to send key request.
 
