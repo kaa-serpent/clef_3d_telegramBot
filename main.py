@@ -78,6 +78,13 @@ def chatbot():
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
+                    if '/pollux5' in result['message']['text']:
+                        result = pollux7.generate(result['message']['text'].replace("/pollux5", ""))
+                        if 'pollux5_file.stl' in result:
+                            bot.send_one_stl(result, chat_id, msg_id)
+                        else:
+                            bot.telegram_bot_sendtext(result, chat_id, msg_id)
+
                     if '/lpl' in result['message']['text']:
                         prompt = result['message']['text'].replace("/lpl ", "").replace("/lpl", "")
                         bot_response = "https://www.youtube.com/@lockpickinglawyer/search?query=" + prompt
