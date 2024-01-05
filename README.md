@@ -13,11 +13,13 @@ The moment the command is sent, the Clef 3D TelegramBot springs into action. Lev
 
 - [x] dynaxis
 - [x] fontaine 5
-- [ ] polux
-  - [ ] polux 5
-  - [ ] polux 7
+- [x] polux
+  - [x] polux 5
+  - [x] polux 7
 - [ ] Laperche Rols
-     
+- [ ] Cavers Cavith
+
+
 I am curently working on this feel free to send key request.
 
 ### Features
