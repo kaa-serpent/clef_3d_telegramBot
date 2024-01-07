@@ -4,7 +4,7 @@ import os
 import requests
 
 # read credential json
-with open('credentials.json') as f:
+with open('../credentials.json') as f:
     data = json.load(f)
     BOT_TOKEN = data['BOT_TOKEN']
 
@@ -55,17 +55,22 @@ def telegram_bot_sendtext(bot_message, chat_id, msg_id):
     return response.json()
 
 
-def telegram_bot_sendimage(image_url, group_id, msg_id):
+def telegram_bot_sendimage(image_path, group_id, msg_id):
     """Function that sends an image to a specific telegram group"""
-    data = {
-        'chat_id': group_id,
-        'photo': image_url,
-        'reply_to_message_id': msg_id,
-    }
-    url = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendPhoto'
 
-    response = requests.post(url, data=data)
-    return response.json()
+    url = f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto'
+    # Construct the absolute path of the image file
+    # Open the image file in binary mode
+    with open(image_path, 'rb') as photo:
+        files = {'photo': ('image.png', photo)}
+
+        data = {
+            'chat_id': group_id,
+            'reply_to_message_id': msg_id,
+        }
+
+        response = requests.post(url, data=data, files=files)
+        return response.json()
 
 
 def send_screenshots(group_id, msg_id):
@@ -92,3 +97,4 @@ def send_one_stl(stl_file_name, group_id, msg_id):
         response = requests.post(url, data={'chat_id': group_id}, files={'document': f})
         check_html_status_code(response, group_id, msg_id)
         print(response.json())
+

@@ -36,16 +36,21 @@ code_input = [7, 4, 6, 4, 6, 3, 6, 1, 0, 7]
 
 
 def decode(message: str) -> str:
+    if 'help' in message:
+        # send picture of key cut
+        return "code_decoder/abloy/disc_decode_final_font.png"
     listmes = utils.clean_message(message)
     # check len to check id code or cut
-    if len(listmes) == 10:
+    if len(listmes) == 11:
         # code to cut
         listmes.pop()
+        listmes = list(map(int, listmes))
         resultlist = translate_code_to_cut(listmes, translation_table)
         code = "Le code de coupe est : " + str(resultlist)
-    elif len(listmes) == 9:
+    elif len(listmes) == 10:
         # cut to code
-        resultlist = translate_code_to_cut(code_input, translation_table)
+        listmes = list(map(int, listmes))
+        resultlist = translate_cut_to_code(listmes, translation_table)
         code = "Le numéro de carte de propiétée est : " + str(resultlist)
     else:
         code = "Vérifiez la syntaxe je n'ai pas compris votre message."
