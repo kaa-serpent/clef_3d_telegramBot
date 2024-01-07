@@ -77,10 +77,10 @@ def chatbot():
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     if '/genhelp' in result['message']['text']:
-                        bot_response = "`/fontaine5 help` " \
-                                       "`/dynaxis help`" \
-                                       "`/pollux5 help`" \
-                                       "`/pollux7 help`" \
+                        bot_response = "`/fontaine5 help`\n" \
+                                       "`/dynaxis help`\n" \
+                                       "`/pollux5 help`\n" \
+                                       "`/pollux7 help`\n" \
                                        "- plus de générateurs de clefs a venir et des photos d'illustrations\n\n"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
