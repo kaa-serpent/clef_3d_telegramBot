@@ -7,7 +7,7 @@ with open('paths.json') as json_file:
     paths = json.load(json_file)
 
 if platform.system().lower() == 'windows':
-    openscad_path = paths.get("win_path_openscad", None)
+    openscad_path = paths.get("win_path_openscad")
 else:
     openscad_path = paths.get("rasp_path_openscad")
 
