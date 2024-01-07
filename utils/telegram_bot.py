@@ -4,7 +4,7 @@ import os
 import requests
 
 # read credential json
-with open('../credentials.json') as f:
+with open('credentials.json') as f:
     data = json.load(f)
     BOT_TOKEN = data['BOT_TOKEN']
 
