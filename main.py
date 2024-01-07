@@ -70,6 +70,9 @@ def chatbot():
                     # Retrieving the chat ID
                     chat_id = str(result['message']['chat']['id'])
 
+                    print(f"Message par : {result['first_name']}")
+                    print(f" Message : {result['message']}")
+
                     if '/help' in result['message']['text']:
                         bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
                                        "-`/genhelp` Liste les differentes clef possible de générer et leurs commande pour les générer \n" \
