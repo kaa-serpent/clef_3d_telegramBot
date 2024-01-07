@@ -14,7 +14,6 @@ current_os = platform.system()
 openscad_path = paths.get(f"{current_os.lower()}_path_openscad", None)
 
 
-
 def generate(message: str) -> str:
     """Function that generates a key from a given message"""
     # check message format
