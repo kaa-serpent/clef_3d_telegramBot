@@ -7,7 +7,7 @@ import platform
 import utils.telegram_bot as bot
 import key_generator.fontaine5 as fontaine5
 from code_decoder import abloy_code
-from key_generator import pollux7, pollux5
+from key_generator import pollux7, pollux5, dynaxis
 
 # get credential from json file
 with open('credentials.json') as f:
@@ -96,7 +96,7 @@ def chatbot():
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     if '/dynaxis' in result['message']['text']:
-                        result = fontaine5.generate(result['message']['text'].replace("/dynaxis", ""))
+                        result = dynaxis.generate(result['message']['text'].replace("/dynaxis", ""))
                         if 'dynaxis_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
@@ -127,6 +127,7 @@ def chatbot():
                         result = abloy_code.decode(result['message']['text'].replace("/abloycode", ""))
                         if result == "code_decoder/abloy/disc_decode_final_font.png":
                             bot.telegram_bot_sendimage("code_decoder/abloy/disc_decode_final_font.png", chat_id, msg_id)
+                        else:
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
