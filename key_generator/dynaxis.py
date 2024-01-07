@@ -34,8 +34,8 @@ def generate(message: str) -> str:
 
     # check if the list contains only numbers between 0 and 10
     for element in message:
-        if float(element) < 0 or float(element) > 10:
-            return "La liste doit contenir uniquement des nombres entre 0 et 10"
+        if not float(element):
+            return "La liste doit contenir uniquement des nombres : " + str(element)
 
     # the list is valid, generate the key
     # Define the OpenSCAD script as a string clef_dynaxis(8,0,8,6.5,3,4,3);
