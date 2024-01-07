@@ -47,8 +47,8 @@ def chatbot():
     if not os.path.exists(filename):
         with open(filename, "w") as f:
             f.write("1")
-    else:
-        print(".")
+    # else:
+       # print(".")
 
     with open(filename) as f:
         last_update = f.read()
