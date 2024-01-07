@@ -69,9 +69,10 @@ def chatbot():
                     msg_id = str(int(result['message']['message_id']))
                     # Retrieving the chat ID
                     chat_id = str(result['message']['chat']['id'])
-
-                    print(f"Message par : {result['first_name']}")
-                    print(f" Message : {result['message']}")
+                    user = result['first_name']['text']
+                    mess = result['message']['text']
+                    print(f"Message par : {user}")
+                    print(f" Message : {mess}")
 
                     if '/help' in result['message']['text']:
                         bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
