@@ -64,7 +64,7 @@ clef_fontaine({},{},{},{},{});'''.format(message[0], message[1], message[2],
         file.write(openscad_script)
 
     # Generate the key
-    subprocess.run(['C:\\Program Files (x86)\\OpenSCAD\\openscad.exe', '-o', 'fontaine5_file.stl', 'generate_fontaine.scad'])
+    subprocess.run([openscad_path, '-o', 'fontaine5_file.stl', 'generate_fontaine.scad'])
 
     # if file name does not exist, there was an error during the generation
     if "fontaine5_file.stl" not in os.listdir():
