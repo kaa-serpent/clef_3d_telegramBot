@@ -1,4 +1,4 @@
 {
-  "win_path_openscad" : "C:\\\\Program Files (x86)\\\\OpenSCAD\\\\openscad.exe",
-  "rasp_path_openscad" : "/usr/local/bin/openscad"
+  "windows_path_openscad" : "C:\\\\Program Files (x86)\\\\OpenSCAD\\\\openscad.exe",
+  "linux_path_openscad" : "/usr/local/bin/openscad"
 }

@@ -6,10 +6,11 @@ import platform
 with open('paths.json') as json_file:
     paths = json.load(json_file)
 
-if platform.system().lower() == 'windows':
-    openscad_path = paths.get("win_path_openscad")
-else:
-    openscad_path = paths.get("rasp_path_openscad")
+current_os = platform.system()
+
+# Select the appropriate path based on the operating system
+openscad_path = paths.get(f"{current_os.lower()}_path_openscad", None)
+
 
 
 def generate(message: str) -> str:
