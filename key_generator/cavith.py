@@ -3,6 +3,8 @@ import os
 import json
 import platform
 
+from utils import utils
+
 with open('paths.json') as json_file:
     paths = json.load(json_file)
 
@@ -20,10 +22,7 @@ def generate(message: str) -> str:
         return "Pas de mot(s) a rechercher fourni(s)"
 
     # extract the list from the message to a list
-    message = message.replace(' ', '')
-    message = message.replace('[', '')
-    message = message.replace(']', '')
-    message = message.split(',')
+    message = utils.clean_message(message)
 
     # check if the list contains 5 elements or 6 and protected
     if len(message) != 5:
