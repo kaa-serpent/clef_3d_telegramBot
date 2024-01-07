@@ -96,7 +96,7 @@ def chatbot():
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     if '/dynaxis' in result['message']['text']:
-                        result = fontaine5.generate(result['message']['text'].replace("/dynaxis", ""))
+                        result = dynaxis.generate(result['message']['text'].replace("/dynaxis", ""))
                         if 'dynaxis_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
@@ -110,7 +110,7 @@ def chatbot():
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     if '/pollux5' in result['message']['text']:
-                        result = dynaxis.generate(result['message']['text'].replace("/pollux5", ""))
+                        result = pollux5.generate(result['message']['text'].replace("/pollux5", ""))
                         if 'pollux5_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
