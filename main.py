@@ -48,7 +48,7 @@ def chatbot():
         with open(filename, "w") as f:
             f.write("1")
     else:
-        print("last message id file exists.")
+        print(".")
 
     with open(filename) as f:
         last_update = f.read()
