@@ -18,8 +18,12 @@ def generate(message: str) -> str:
     """Function that generates a key from a given message"""
     # check message format
     if message == '':
-        return "Pas de mot(s) a rechercher fourni(s)"
+        return "Pas de code"
 
+    if 'help' in message:
+        return "Génération d'une clef fontaine 5 aillettes 3d \n" \
+               "donnez les profondeurs des coupes 1,2,3,4,5 dans le sens horraire, 1 est en bas à gauche\n" \
+                "séparez les chiffres par des virgules \n exemple : \n `/fontaine5 1,5,4,3,2` \n"
     # extract the list from the message to a list
     message = utils.clean_message(message)
 

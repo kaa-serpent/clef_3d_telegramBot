@@ -77,8 +77,8 @@ def chatbot():
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     if '/genhelp' in result['message']['text']:
-                        bot_response = "-```/fontaine5``` Génération d'une clef fontaine 5 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules \n " \
-                                       "-```/dynaxis``` Génération d'une clef dynaxis 7 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5,6,7 en mm] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules\n " \
+                        bot_response = "```/fontaine5 help``` " \
+                                       "```/dynaxis help```" \
                                        "- plus de générateurs de clefs a venir et des photos d'illustrations\n\n"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
