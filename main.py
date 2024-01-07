@@ -5,7 +5,7 @@ import os
 
 import utils.telegram_bot as bot
 import key_generator.fontaine5 as fontaine5
-from key_generator import pollux7
+from key_generator import pollux7, pollux5
 
 # get credential from json file
 with open('credentials.json') as f:
@@ -79,7 +79,7 @@ def chatbot():
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     if '/pollux5' in result['message']['text']:
-                        result = pollux7.generate(result['message']['text'].replace("/pollux5", ""))
+                        result = pollux5.generate(result['message']['text'].replace("/pollux5", ""))
                         if 'pollux5_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:

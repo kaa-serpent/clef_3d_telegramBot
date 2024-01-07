@@ -1,5 +1,15 @@
 import subprocess
 import os
+import json
+import platform
+
+with open('paths.json') as json_file:
+    paths = json.load(json_file)
+
+if platform.system().lower() == 'windows':
+    openscad_path = paths.get("win_path_openscad", None)
+else:
+    openscad_path = paths.get("rasp_path_openscad")
 
 
 def generate(message: str) -> str:
