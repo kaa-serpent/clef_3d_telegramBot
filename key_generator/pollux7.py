@@ -29,7 +29,9 @@ def generate(message: str) -> str:
 
     # check if the list contains only numbers
     for element in message:
-        if not element.isnumeric():
+        try:
+            float(element)  # Try converting the element to a float
+        except ValueError:
             return "La liste doit contenir uniquement des nombres"
 
     # check if the list contains only numbers between 0 and 10
