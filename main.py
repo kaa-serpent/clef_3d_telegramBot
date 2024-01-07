@@ -87,6 +87,7 @@ def chatbot():
                                        "- plus de codes disponible prochainement\n\n"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
+                    print('- - - - -')
                     print(result['message']['text'])
 
                     if '/fontaine5' in result['message']['text']:
