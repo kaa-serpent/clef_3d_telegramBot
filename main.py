@@ -72,18 +72,18 @@ def chatbot():
 
                     if '/help' in result['message']['text']:
                         bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
-                                       "-`/helpgen` Liste les differentes clef possible de générer et leurs commande pour les générer \n" \
-                                       "-`/helpcode` Liste les code disponible à traduire de code de coupe à carte de propiétée \n "
+                                       "-`/genhelp` Liste les differentes clef possible de générer et leurs commande pour les générer \n" \
+                                       "-`/codehelp` Liste les code disponible à traduire de code de coupe à carte de propiétée \n "
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     if '/genhelp' in result['message']['text']:
-                        bot_response = "-`/fontaine5` Génération d'une clef fontaine 5 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules \n " \
-                                       "-`/dynaxis` Génération d'une clef dynaxis 7 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5,6,7 en mm] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules\n " \
+                        bot_response = "-```/fontaine5``` Génération d'une clef fontaine 5 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules \n " \
+                                       "-```/dynaxis``` Génération d'une clef dynaxis 7 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5,6,7 en mm] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules\n " \
                                        "- plus de générateurs de clefs a venir et des photos d'illustrations\n\n"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     if '/codehelp' in result['message']['text']:
-                        bot_response = "-`/abloycode` Traduction du code de coupe d'un clef abloy (protect, disclock etc...) à un code de carte de propiétée ou vise versa. fournir une liste de 10 chiffres ex: [6,1,2,6,5,4,0,1,3,3], pour obtenir les coupes depuis la carte de proprietée ajouter `carte` à la fin de la liste ex: `/abloycode 6,1,2,6,5,4,0,1,3,3` /abloycode 7,4,6,4,6,3,6,1,0,7,carte` \n\n " \
+                        bot_response = "- ```/abloycode``` Traduction du code de coupe d'un clef abloy (protect, disclock etc...) à un code de carte de propiétée ou vise versa. fournir une liste de 10 chiffres ex: [6,1,2,6,5,4,0,1,3,3], pour obtenir les coupes depuis la carte de proprietée ajouter `carte` à la fin de la liste ex: `/abloycode 6,1,2,6,5,4,0,1,3,3` /abloycode 7,4,6,4,6,3,6,1,0,7,carte` \n\n " \
                                        "- plus de codes disponible prochainement\n\n"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
