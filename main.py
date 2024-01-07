@@ -6,6 +6,7 @@ import os
 import platform
 import utils.telegram_bot as bot
 import key_generator.fontaine5 as fontaine5
+from code_decoder import abloy_code
 from key_generator import pollux7, pollux5
 
 # get credential from json file
@@ -71,10 +72,19 @@ def chatbot():
 
                     if '/help' in result['message']['text']:
                         bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
-                                       "-`/fontaine5` Génération d'une clef fontaine 5 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules \n " \
+                                       "-`/helpgen` Liste les differentes clef possible de générer et leurs commande pour les générer \n" \
+                                       "-`/helpcode` Liste les code disponible à traduire de code de coupe à carte de propiétée \n "
+                        print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
+
+                    if '/helpgen' in result['message']['text']:
+                        bot_response = "-`/fontaine5` Génération d'une clef fontaine 5 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules \n " \
                                        "-`/dynaxis` Génération d'une clef dynaxis 7 aillettes 3d donner les profondeurs des coupes [1,2,3,4,5,6,7 en mm] dans le sens horraire, 1 est en bas à gauche, séparez les chiffres par des virgules\n " \
-                                       "-`/lpl` recherche sur la chaine youtube LockPickingLayer (seulement sur pc) \n\n" \
-                                       "- plus de générateurs de clefs a venir \n\n"
+                                       "- plus de générateurs de clefs a venir et des photos d'illustrations\n\n"
+                        print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
+
+                    if '/helpcode' in result['message']['text']:
+                        bot_response = "-`/abloycode` Traduction du code de coupe d'un clef abloy (protect, disclock etc...) à un code de carte de propiétée ou vise versa. fournir une liste de 10 chiffres ex: [6,1,2,6,5,4,0,1,3,3], pour obtenir les coupes depuis la carte de proprietée ajouter `carte` à la fin de la liste ex:  \n `/abloycode 6,1,2,6,5,4,0,1,3,3` \n /abloycode 7,4,6,4,6,3,6,1,0,7,carte` \n\n " \
+                                       "- plus de codes disponible prochainement\n\n"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     if '/fontaine5' in result['message']['text']:
@@ -113,10 +123,9 @@ def chatbot():
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/lpl' in result['message']['text']:
-                        prompt = result['message']['text'].replace("/lpl ", "").replace("/lpl", "")
-                        bot_response = "https://www.youtube.com/@lockpickinglawyer/search?query=" + prompt
-                        print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
+                    if '/abloycode' in result['message']['text']:
+                        result = abloy_code.decode(result['message']['text'].replace("/abloycode", ""))
+                        bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
         except Exception as e:
             print(e)
