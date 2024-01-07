@@ -83,7 +83,8 @@ def chatbot():
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     if '/codehelp' in result['message']['text']:
-                        bot_response ="- plus de codes disponible prochainement\n\n"
+                        bot_response = "- ```/abloycode``` Traduction du code de coupe d'un clef abloy (protect, disclock etc...) à un code de carte de propiétée ou vise versa. fournir une liste de 10 chiffres ex: [6,1,2,6,5,4,0,1,3,3], pour obtenir les coupes depuis la carte de proprietée ajouter `carte` à la fin de la liste ex: \n```/abloycode 6,1,2,6,5,4,0,1,3,3``` \n```/abloycode 7,4,6,4,6,3,6,1,0,7,carte``` \n\n " \
+                                       "- plus de codes disponible prochainement\n\n"
                         print(bot.telegram_bot_sendtext(bot_response, chat_id, msg_id))
 
                     if '/fontaine5' in result['message']['text']:
