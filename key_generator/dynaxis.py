@@ -27,11 +27,6 @@ def generate(message: str) -> str:
     if len(message) != 7:
         return "La liste doit contenir 7 coupes"
 
-    # check if the list contains only numbers
-    for element in message:
-        if not element.isnumeric():
-            return "La liste doit contenir uniquement des nombres"
-
     # check if the list contains only numbers between 0 and 10
     for element in message:
         if not float(element):
