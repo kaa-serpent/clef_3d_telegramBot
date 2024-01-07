@@ -2,7 +2,7 @@ import time
 import requests
 import json
 import os
-
+import platform
 import utils.telegram_bot as bot
 import key_generator.fontaine5 as fontaine5
 from key_generator import pollux7, pollux5
@@ -12,7 +12,27 @@ with open('credentials.json') as f:
     data = json.load(f)
     BOT_TOKEN = data['BOT_TOKEN']
 
+with open('paths.json') as json_file:
+    paths = json.load(json_file)
+
+current_os = platform.system()
 s = requests.Session()
+
+# Copy scad_modules to OpenSCAD library folder
+scad_modules_folder = 'scad_modules'
+if current_os.lower() == 'windows':
+    openscad_library_folder = os.path.join(os.path.expanduser('~'), 'Documents', 'OpenSCAD', 'libraries')
+else:
+    openscad_library_folder = os.path.join(os.path.expanduser('~'), '.local', 'share', 'OpenSCAD', 'libraries')
+
+# Ensure the destination folder exists
+os.makedirs(openscad_library_folder, exist_ok=True)
+
+# Copy files and overwrite if they already exist
+for file_name in os.listdir(scad_modules_folder):
+    source_file = os.path.join(scad_modules_folder, file_name)
+    destination_file = os.path.join(openscad_library_folder, file_name)
+    shutil.copy2(source_file, destination_file)
 
 
 def chatbot():
