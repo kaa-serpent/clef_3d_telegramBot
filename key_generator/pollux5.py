@@ -14,13 +14,14 @@ current_os = platform.system()
 openscad_path = paths.get(f"{current_os.lower()}_path_openscad", None)
 
 
-def generate(message: str) -> str:
+def generate(message: str, bot, chat_id, msg_id) -> str:
     """Function that generates a key from a given message"""
     # check message format
     if message == '':
         return "Pas de mot(s) a rechercher fourni(s)"
 
     if 'help' in message:
+        bot.telegram_bot_sendimage("key_generator/help/pollux5.jpg", chat_id, msg_id)
         return " Génération d'une clef pollux 5 aillettes 3d\n" \
                "donnez les profondeurs des coupes [1,2,3,4,5 en mm] dans le sens horraire, 1 est en bas à gauche\n" \
                "séparez les chiffres par des virgules\n" \

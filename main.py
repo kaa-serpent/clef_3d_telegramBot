@@ -93,7 +93,7 @@ def chatbot():
                     print(result['message']['from']['first_name'] + " : " + result['message']['text'])
 
                     if '/fontaine5' in result['message']['text']:
-                        result = fontaine5.generate(result['message']['text'].replace("/fontaine5", ""))
+                        result = fontaine5.generate(result['message']['text'].replace("/fontaine5", ""), bot, chat_id, msg_id)
                         # if result contains "fontaine5" then it is a valid response
                         if 'fontaine5_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
@@ -101,21 +101,21 @@ def chatbot():
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     if '/dynaxis' in result['message']['text']:
-                        result = dynaxis.generate(result['message']['text'].replace("/dynaxis", ""))
+                        result = dynaxis.generate(result['message']['text'].replace("/dynaxis", ""), bot, chat_id, msg_id)
                         if 'dynaxis_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     if '/pollux7' in result['message']['text']:
-                        result = pollux7.generate(result['message']['text'].replace("/pollux7", ""))
+                        result = pollux7.generate(result['message']['text'].replace("/pollux7", ""), bot, chat_id, msg_id)
                         if 'pollux7_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     if '/pollux5' in result['message']['text']:
-                        result = pollux5.generate(result['message']['text'].replace("/pollux5", ""))
+                        result = pollux5.generate(result['message']['text'].replace("/pollux5", ""), bot, chat_id, msg_id)
                         if 'pollux5_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
