@@ -79,7 +79,7 @@ def chatbot():
                                        "`/codehelp` Liste les code disponible à traduire de code de coupe à carte de propiétée \n\n "
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
-                    elif '/genhelp' in result['message']['text']:
+                    if '/genhelp' in result['message']['text']:
                         bot_response = "`/fontaine5 help`\n" \
                                        "`/dynaxis help`\n" \
                                        "`/pollux5 help`\n" \
