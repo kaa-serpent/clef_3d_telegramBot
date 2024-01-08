@@ -70,6 +70,9 @@ def chatbot():
                     # Retrieving the chat ID
                     chat_id = str(result['message']['chat']['id'])
 
+                    print('- - - - -')
+                    print(result['message']['from']['first_name'] + " : " + result['message']['text'])
+
                     if '/help' in result['message']['text']:
                         bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
                                        "-`/genhelp` Liste les differentes clef possible de générer et leurs commande pour les générer \n" \
@@ -88,9 +91,6 @@ def chatbot():
                         bot_response = "- ```/abloycode``` code de coupe d'un clef abloy (protect, disclock etc...)\n " \
                                        "- plus de codes disponible prochainement\n\n"
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
-
-                    print('- - - - -')
-                    print(result['message']['from']['first_name'] + " : " + result['message']['text'])
 
                     elif '/fontaine5' in result['message']['text']:
                         result = fontaine5.generate(result['message']['text'].replace("/fontaine5", ""), bot, chat_id, msg_id)
