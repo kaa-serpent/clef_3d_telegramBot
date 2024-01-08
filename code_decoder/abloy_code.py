@@ -57,5 +57,10 @@ def decode(message: str, bot, chat_id, msg_id) -> str:
         resultlist = translate_cut_to_code(listmes, translation_table)
         code = "Le numéro de carte de propiétée est : " + str(resultlist)
     else:
-        code = "Vérifiez la syntaxe je n'ai pas compris votre message."
+        result = "Permet de passer du code de coupe au code de la carte de propiétée ou vise versa \n" \
+                 "Ajouer `carte` à la suite permet de passer du code de la carte de propietée au code de coupe\n" \
+                 "ex:\n`/abloycode 6,1,2,6,5,4,0,1,3,3` \n `/abloycode 7,4,6,4,6,3,6,1,0,7,carte` \n\n"
+        bot.telegram_bot_sendtext(result, chat_id, msg_id)
+        # send picture of key cut
+        return "code_decoder/abloy/disc_decode_final_font.png"
     return code

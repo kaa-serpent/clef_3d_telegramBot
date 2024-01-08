@@ -80,7 +80,7 @@ def chatbot():
                                        "`/codehelp` Liste les code disponible à traduire de code de coupe à carte de propiétée \n\n "
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
-                    if '/genhelp' in text:
+                    elif '/genhelp' in text:
                         bot_response = "`/fontaine5 help`\n" \
                                        "`/dynaxis help`\n" \
                                        "`/pollux5 help`\n" \
@@ -88,12 +88,12 @@ def chatbot():
                                        "- plus de générateurs de clefs a venir et des photos d'illustrations\n\n"
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
-                    if '/codehelp' in text:
+                    elif '/codehelp' in text:
                         bot_response = "`/abloycode` code de coupe d'un clef abloy (protect, disclock etc...)\n " \
                                        "- plus de codes disponible prochainement\n\n"
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
-                    if '/fontaine5' in text:
+                    elif '/fontaine5' in text:
                         result = fontaine5.generate(text.replace("/fontaine5", ""), bot, chat_id, msg_id)
                         # if result contains "fontaine5" then it is a valid response
                         if 'fontaine5_file.stl' in result:
@@ -101,40 +101,43 @@ def chatbot():
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/dynaxis' in text:
+                    elif '/dynaxis' in text:
                         result = dynaxis.generate(text.replace("/dynaxis", ""), bot, chat_id, msg_id)
                         if 'dynaxis_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/pollux7' in text:
+                    elif '/pollux7' in text:
                         result = pollux7.generate(text.replace("/pollux7", ""), bot, chat_id, msg_id)
                         if 'pollux7_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/pollux5' in text:
+                    elif '/pollux5' in text:
                         result = pollux5.generate(text.replace("/pollux5", ""), bot, chat_id, msg_id)
                         if 'pollux5_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/cavith' in text:
+                    elif '/cavith' in text:
                         result = pollux7.generate(text.replace("/cavith", ""))
                         if 'cavith_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/abloycode' in text:
+                    elif '/abloycode' in text:
                         result = abloy_code.decode(text.replace("/abloycode", ""), bot, chat_id, msg_id)
                         if result == "code_decoder/abloy/disc_decode_final_font.png":
                             bot.telegram_bot_sendimage("code_decoder/abloy/disc_decode_final_font.png", chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
+
+                    else:
+                        bot.telegram_bot_sendtext("Commande non reconnue.", chat_id, msg_id)
 
         except Exception as e:
             print(e)
