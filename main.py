@@ -137,7 +137,7 @@ def chatbot():
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     else:
-                        bot.telegram_bot_sendtext("Commande non reconnue.", chat_id, msg_id)
+                        bot.telegram_bot_sendtext("Commande non reconnue. \n `/help`", chat_id, msg_id)
 
         except Exception as e:
             print(e)
