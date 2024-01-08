@@ -75,8 +75,8 @@ def chatbot():
 
                     if '/help' in result['message']['text']:
                         bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
-                                       "-`/genhelp` Liste les differentes clef possible de générer et leurs commande pour les générer \n" \
-                                       "-`/codehelp` Liste les code disponible à traduire de code de coupe à carte de propiétée \n "
+                                       "`/genhelp` Liste les differentes clef possible de générer et leurs commande pour les générer \n\n" \
+                                       "`/codehelp` Liste les code disponible à traduire de code de coupe à carte de propiétée \n\n "
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
                     elif '/genhelp' in result['message']['text']:
@@ -88,7 +88,7 @@ def chatbot():
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
                     elif '/codehelp' in result['message']['text']:
-                        bot_response = "- ```/abloycode``` code de coupe d'un clef abloy (protect, disclock etc...)\n " \
+                        bot_response = "```/abloycode``` code de coupe d'un clef abloy (protect, disclock etc...)\n " \
                                        "- plus de codes disponible prochainement\n\n"
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
