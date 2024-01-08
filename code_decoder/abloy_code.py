@@ -36,7 +36,7 @@ code_input = [7, 4, 6, 4, 6, 3, 6, 1, 0, 7]
 
 
 def decode(message: str, bot, chat_id, msg_id) -> str:
-    if 'help' in message:
+    if 'help' in message or '' in message:
         result = "Permet de passer du code de coupe au code de la carte de propiétée ou vise versa \n" \
                  "Ajouer `carte` à la suite permet de passer du code de la carte de propietée au code de coupe\n" \
                  "ex:\n`/abloycode 6,1,2,6,5,4,0,1,3,3` \n `/abloycode 7,4,6,4,6,3,6,1,0,7,carte` \n\n"

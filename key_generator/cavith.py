@@ -31,7 +31,7 @@ def generate(message: str) -> str:
         return "La liste doit contenir 5 coupes"
 
     for element in message:
-        if not float(element):
+        if not float(element) or element == 0:
             return "La liste doit contenir uniquement des nombres : " + str(element)
 
     # the list is valid, generate the key

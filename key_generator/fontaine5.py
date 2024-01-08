@@ -35,15 +35,8 @@ def generate(message: str, bot, chat_id, msg_id) -> str:
                 return "La liste doit contenir 5 coupes protected"
         return "La liste doit contenir 5 coupes"
 
-    # check if the list contains only numbers
     for element in message:
-        try:
-            float(element)  # Try converting the element to a float
-        except ValueError:
-            return "La liste doit contenir uniquement des nombres"
-
-    for element in message:
-        if not float(element):
+        if not float(element) or element == 0:
             return "La liste doit contenir uniquement des nombres : " + str(element)
 
     # the list is valid, generate the key
