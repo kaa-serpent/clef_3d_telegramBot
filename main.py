@@ -76,7 +76,7 @@ def chatbot():
                                        "-`/codehelp` Liste les code disponible à traduire de code de coupe à carte de propiétée \n "
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
-                    if '/genhelp' in result['message']['text']:
+                    elif '/genhelp' in result['message']['text']:
                         bot_response = "`/fontaine5 help`\n" \
                                        "`/dynaxis help`\n" \
                                        "`/pollux5 help`\n" \
@@ -84,7 +84,7 @@ def chatbot():
                                        "- plus de générateurs de clefs a venir et des photos d'illustrations\n\n"
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
-                    if '/codehelp' in result['message']['text']:
+                    elif '/codehelp' in result['message']['text']:
                         bot_response = "- ```/abloycode``` code de coupe d'un clef abloy (protect, disclock etc...)\n " \
                                        "- plus de codes disponible prochainement\n\n"
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
@@ -92,7 +92,7 @@ def chatbot():
                     print('- - - - -')
                     print(result['message']['from']['first_name'] + " : " + result['message']['text'])
 
-                    if '/fontaine5' in result['message']['text']:
+                    elif '/fontaine5' in result['message']['text']:
                         result = fontaine5.generate(result['message']['text'].replace("/fontaine5", ""), bot, chat_id, msg_id)
                         # if result contains "fontaine5" then it is a valid response
                         if 'fontaine5_file.stl' in result:
@@ -100,35 +100,35 @@ def chatbot():
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/dynaxis' in result['message']['text']:
+                    elif '/dynaxis' in result['message']['text']:
                         result = dynaxis.generate(result['message']['text'].replace("/dynaxis", ""), bot, chat_id, msg_id)
                         if 'dynaxis_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/pollux7' in result['message']['text']:
+                    elif '/pollux7' in result['message']['text']:
                         result = pollux7.generate(result['message']['text'].replace("/pollux7", ""), bot, chat_id, msg_id)
                         if 'pollux7_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/pollux5' in result['message']['text']:
+                    elif '/pollux5' in result['message']['text']:
                         result = pollux5.generate(result['message']['text'].replace("/pollux5", ""), bot, chat_id, msg_id)
                         if 'pollux5_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/cavith' in result['message']['text']:
+                    elif '/cavith' in result['message']['text']:
                         result = pollux7.generate(result['message']['text'].replace("/cavith", ""))
                         if 'cavith_file.stl' in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
-                    if '/abloycode' in result['message']['text']:
+                    elif '/abloycode' in result['message']['text']:
                         result = abloy_code.decode(result['message']['text'].replace("/abloycode", ""), bot, chat_id, msg_id)
                         if result == "code_decoder/abloy/disc_decode_final_font.png":
                             bot.telegram_bot_sendimage("code_decoder/abloy/disc_decode_final_font.png", chat_id, msg_id)
