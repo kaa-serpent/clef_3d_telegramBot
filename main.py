@@ -88,7 +88,7 @@ def chatbot():
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
                     elif '/codehelp' in result['message']['text']:
-                        bot_response = "```/abloycode``` code de coupe d'un clef abloy (protect, disclock etc...)\n " \
+                        bot_response = "`/abloycode` code de coupe d'un clef abloy (protect, disclock etc...)\n " \
                                        "- plus de codes disponible prochainement\n\n"
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
