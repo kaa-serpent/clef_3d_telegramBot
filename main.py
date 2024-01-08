@@ -73,7 +73,7 @@ def chatbot():
                     print('- - - - -')
                     print(result['message']['from']['first_name'] + " : " + result['message']['text'])
 
-                    if '/help' in result['message']['text']:
+                    if '/help' in result['message']['text'] or '/start' in result['message']['text']:
                         bot_response = "*Hello c'est Clefmentine un bot pour aider avec les clefs* \n\n " \
                                        "`/genhelp` Liste les differentes clef possible de générer et leurs commande pour les générer \n\n" \
                                        "`/codehelp` Liste les code disponible à traduire de code de coupe à carte de propiétée \n\n "
