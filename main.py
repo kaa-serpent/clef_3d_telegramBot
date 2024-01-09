@@ -55,7 +55,14 @@ def chatbot():
 
     # Check for new messages in Telegram group
     url = f'https://api.telegram.org/bot{BOT_TOKEN}/getUpdates?offset={last_update}'
-    response = requests.get(url)
+
+    try:
+        response = requests.get(url)
+    except NameError:
+        # network error
+        print("Potential network error : " + NameError)
+        return "done"
+
     data = json.loads(response.content)
 
     for result in data['result']:
