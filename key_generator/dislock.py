@@ -2,6 +2,7 @@ import subprocess
 import os
 import json
 import platform
+import time
 
 from utils import utils
 
@@ -43,20 +44,19 @@ def generate(message: str, bot, chat_id, msg_id) -> str:
 
     # the list is valid, generate the key
     # Define the OpenSCAD script as a string abloy_dislock_pro([0,1,2,3,4,5,6,0,5,4,3]);;
-    openscad_script = '''
-        use <abloy_dislock.scad>;
-        abloy_dislock_pro({});'''.format(message)
-
-    # delete the previous key
-    if "abloy_dislock_pro.stl" in os.listdir():
-        os.remove("abloy_dislock_pro.stl")
+    openscad_script = '''use <abloy_dislock.scad>;
+abloy_dislock_pro({});'''.format(message)
 
     # Write the OpenSCAD script to a file
     with open('generate_abloy_dislock_pro.scad', 'w') as file:
         file.write(openscad_script)
 
+    # delete the previous key
+    if "abloy_dislock_pro.stl" in os.listdir():
+        os.remove("abloy_dislock_pro.stl")
+
     # Generate the key
-    subprocess.run([openscad_path, '-o', 'abloy_dislock_pro.stl', 'abloy_dislock_pro.scad'])
+    subprocess.run([openscad_path, '-o', 'abloy_dislock_pro.stl', 'generate_abloy_dislock_pro.scad'])
 
     # if file name does not exist, there was an error during the generation
     if "abloy_dislock_pro.stl" not in os.listdir():
