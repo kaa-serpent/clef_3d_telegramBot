@@ -27,13 +27,13 @@ module cutter(cut, cut_index, position) {
             rotate([0,0, cut * -disc_angle])
             difference(){
                 cylinder(cut_size, d = key_thickness_x*2);
-                cube([key_thickness_y, key_thickness_x, cut_size*2], center = true);
+                cube([key_thickness_y, key_thickness_x*1.2, cut_size*2], center = true);
             }
             // Cutting shape for the left side
             rotate([0,0,90 - cut*disc_angle])
             difference(){
                 cylinder(cut_size, d = key_thickness_x*2);
-                cube([key_thickness_y, key_thickness_x, cut_size*2], center = true);
+                cube([key_thickness_y, key_thickness_x*1.2, cut_size*2], center = true);
             }
         }
     }
