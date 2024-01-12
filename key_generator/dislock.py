@@ -37,10 +37,9 @@ def generate(message: str, bot, chat_id, msg_id) -> str:
     if len(message) != 11:
         return "La liste doit contenir 11 coupes"
 
-    message = [float(element) for element in message]
-    for element in message:
-        if not int(element) or element == 0 or element == '0':
-            return "La liste doit contenir uniquement des chiffres : " + str(element)
+    message = [int(element) for element in message]
+    if not [isinstance(element, int) for element in message]:
+        return "La liste doit contenir uniquement des chiffres"
 
     # the list is valid, generate the key
     # Define the OpenSCAD script as a string abloy_dislock_pro([0,1,2,3,4,5,6,0,5,4,3]);;
