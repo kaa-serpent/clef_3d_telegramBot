@@ -145,6 +145,13 @@ def chatbot():
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
+                    elif '/dislock' in text:
+                        result = abloy_code.decode(text.replace("/dislock", ""), bot, chat_id, msg_id)
+                        if "abloy_dislock_pro.stl" in result:
+                            bot.send_one_stl(result, chat_id, msg_id)
+                        else:
+                            bot.telegram_bot_sendtext(result, chat_id, msg_id)
+
                     else:
                         bot.telegram_bot_sendtext("Commande non reconnue. \n `/help`", chat_id, msg_id)
 
