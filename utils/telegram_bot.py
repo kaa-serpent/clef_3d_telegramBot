@@ -94,7 +94,11 @@ def send_one_stl(stl_file_name, group_id, msg_id):
     url = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendDocument'
 
     with open(stl_file_name, 'rb') as f:
-        response = requests.post(url, data={'chat_id': group_id}, files={'document': f})
-        check_html_status_code(response, group_id, msg_id)
-        print(response.json())
 
+        try:
+            response = requests.post(url, data={'chat_id': group_id}, files={'document': f})
+            response.raise_for_status()  # Raise an HTTPError for bad responses (4xx or 5xx)
+            print(response.json())
+        except requests.exceptions.RequestException as e:
+            print(f"Error sending file: {e}")
+            telegram_bot_sendtext("Fichier trop gros pour l'api telegram, merci de me contacter pour l'obtenir")
