@@ -16,7 +16,7 @@ module cutter(cut, cut_index, position) {
         if (cut == 6) {
             difference(){
                 cylinder(cut_size, d = key_thickness_y*2);
-                cylinder(cut_size*2, d = key_thickness_y/2);
+                cylinder(cut_size*2, d = key_thickness_y*0.65);
             }
         }
         else if (cut == 0){
