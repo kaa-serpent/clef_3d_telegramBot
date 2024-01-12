@@ -34,7 +34,9 @@ os.makedirs(openscad_library_folder, exist_ok=True)
 for file_name in os.listdir(scad_modules_folder):
     source_file = os.path.join(scad_modules_folder, file_name)
     destination_file = os.path.join(openscad_library_folder, file_name)
-    shutil.copy2(source_file, destination_file)
+    # Check if the item is a file before copying
+    if os.path.isfile(source_file):
+        shutil.copy2(source_file, destination_file)
 
 
 def chatbot():
