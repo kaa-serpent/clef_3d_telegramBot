@@ -39,7 +39,7 @@ def generate(message: str, bot, chat_id, msg_id) -> str:
 
     message = [int(element) for element in message]
     for element in message:
-        if not int(element) or element == 0:
+        if not int(element) or element == 0 or element == '0':
             return "La liste doit contenir uniquement des chiffres : " + str(element)
 
     # the list is valid, generate the key
