@@ -63,6 +63,7 @@ def chatbot():
     except NameError:
         # network error
         print("Potential network error : " + NameError)
+        time.sleep(60)
         return "done"
 
     data = json.loads(response.content)
