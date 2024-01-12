@@ -146,7 +146,7 @@ def chatbot():
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     elif '/dislock' in text:
-                        result = dislock.decode(text.replace("/dislock", ""), bot, chat_id, msg_id)
+                        result = dislock.generate(text.replace("/dislock", ""), bot, chat_id, msg_id)
                         if "abloy_dislock_pro.stl" in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
