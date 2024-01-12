@@ -7,7 +7,7 @@ import platform
 import utils.telegram_bot as bot
 import key_generator.fontaine5 as fontaine5
 from code_decoder import abloy_code
-from key_generator import pollux7, pollux5, dynaxis
+from key_generator import pollux7, pollux5, dynaxis, dislock
 
 # get credential from json file
 with open('credentials.json') as f:
@@ -146,7 +146,7 @@ def chatbot():
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 
                     elif '/dislock' in text:
-                        result = abloy_code.decode(text.replace("/dislock", ""), bot, chat_id, msg_id)
+                        result = dislock.decode(text.replace("/dislock", ""), bot, chat_id, msg_id)
                         if "abloy_dislock_pro.stl" in result:
                             bot.send_one_stl(result, chat_id, msg_id)
                         else:
