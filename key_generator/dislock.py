@@ -18,13 +18,8 @@ openscad_path = paths.get(f"{current_os.lower()}_path_openscad", None)
 def generate(message: str, bot, chat_id, msg_id) -> str:
     """Function that generates a key from a given message"""
     # check message format
-    if message == '':
-        bot.telegram_bot_sendimage("key_generator/help/abloy_dislock.jpg", chat_id, msg_id)
-        return " Génération d'une abloy dislock / dislock pro 3d\n" \
-               "donnez les coupes de 1 à 11\n" \
-               "example :\n /dislock 01234560543\n"
 
-    if 'help' in message:
+    if 'help' in message or message == '':
         bot.telegram_bot_sendimage("key_generator/help/abloy_dislock.jpg", chat_id, msg_id)
         return " Génération d'une abloy dislock / dislock pro 3d\n" \
                "donnez les coupes de 1 à 11\n" \

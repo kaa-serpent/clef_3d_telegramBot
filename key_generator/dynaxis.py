@@ -17,10 +17,8 @@ openscad_path = paths.get(f"{current_os.lower()}_path_openscad", None)
 def generate(message: str, bot, chat_id, msg_id) -> str:
     """Function that generates a key from a given message"""
     # check message format
-    if message == '':
-        return "Pas de mot(s) a rechercher fourni(s)"
 
-    if 'help' in message:
+    if 'help' in message or message == '':
         bot.telegram_bot_sendimage("key_generator/help/dynaxis.jpg", chat_id, msg_id)
         return " Génération d'une clef dynaxis 7 aillettes 3d\n" \
                 "donnez les profondeurs des coupes [1,2,3,4,5,6,7 en mm] dans le sens horraire, 1 est en bas à gauche\n" \

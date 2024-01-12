@@ -90,11 +90,12 @@ def chatbot():
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
                     elif '/genhelp' in text:
-                        bot_response = "`/fontaine5 help`\n" \
-                                       "`/dynaxis help`\n" \
-                                       "`/pollux5 help`\n" \
-                                       "`/pollux7 help`\n" \
-                                       "- plus de générateurs de clefs a venir et des photos d'illustrations\n\n"
+                        bot_response =  "`/fontaine5`\n" \
+                                        "`/dynaxis`\n" \
+                                        "`/pollux5`\n" \
+                                        "`/pollux7`\n" \
+                                        "`/dislock` dislock et dislock pro\n" \
+                                        "- plus de générateurs de clefs a venir et des photos d'illustrations\n\n"
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
                     elif '/codehelp' in text:
