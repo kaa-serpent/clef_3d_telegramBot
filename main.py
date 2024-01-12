@@ -94,7 +94,7 @@ def chatbot():
                                         "`/dynaxis`\n" \
                                         "`/pollux5`\n" \
                                         "`/pollux7`\n" \
-                                        "`/dislock` dislock et dislock pro\n" \
+                                        "`/dislock` , dislock et dislock pro\n" \
                                         "- plus de générateurs de clefs a venir et des photos d'illustrations\n\n"
                         bot.telegram_bot_sendtext(bot_response, chat_id, msg_id)
 
