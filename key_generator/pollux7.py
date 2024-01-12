@@ -23,7 +23,7 @@ def generate(message: str, bot, chat_id, msg_id) -> str:
         return "Génération d'une clef pollux 7 aillettes 3d\n" \
                 "donnez les profondeurs des coupes [1,2,3,4,5,6,7 en mm] dans le sens horraire, 1 est en bas à gauche\n" \
                 "séparez les chiffres par des virgules\n" \
-                "example :\n /pollux7 1,5,4,3,4,2,7"
+                "exemple :\n /pollux7 1,5,4,3,4,2,7"
 
     # extract the list from the message to a list
     message = utils.clean_message(message)

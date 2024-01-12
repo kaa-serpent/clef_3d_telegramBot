@@ -23,7 +23,7 @@ def generate(message: str, bot, chat_id, msg_id) -> str:
         bot.telegram_bot_sendimage("key_generator/help/abloy_dislock.jpg", chat_id, msg_id)
         return " Génération d'une abloy dislock / dislock pro 3d\n" \
                "donnez les coupes de 1 à 11\n" \
-               "example :\n /dislock 01234560543\n" \
+               "exemple :\n /dislock 01234560543\n" \
                "La génération peut prendre plusieurs minutes merci de patienter\n"
 
     message = message.replace(' ', '')
