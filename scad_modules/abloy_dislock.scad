@@ -12,6 +12,7 @@ key_thickness_x = 3.3; // blank measurements if it was a square X
 module cutter(cut, cut_index, position) {
     // every cut need to be rotated , 0 cut = no rotation, 6 cut = max rotation
     // move to desire place and rotate to cut angle
+    function sideLengthFromDiagonal(diagonal) = diagonal / sqrt(2);
     translate(position){
         if (cut == 6) {
             difference(){
@@ -27,13 +28,13 @@ module cutter(cut, cut_index, position) {
             rotate([0,0, cut * -disc_angle])
             difference(){
                 cylinder(cut_size, d = key_thickness_x*2);
-                cube([key_thickness_y, key_thickness_x*1.2, cut_size*2], center = true);
+                cube([key_thickness_y, sideLengthFromDiagonal(key_thickness_y), cut_size*2], center = true);
             }
             // Cutting shape for the left side
             rotate([0,0,90 - cut*disc_angle])
             difference(){
                 cylinder(cut_size, d = key_thickness_x*2);
-                cube([key_thickness_y, key_thickness_x*1.2, cut_size*2], center = true);
+                cube([key_thickness_y, sideLengthFromDiagonal(key_thickness_y), cut_size*2], center = true);
             }
         }
     }
