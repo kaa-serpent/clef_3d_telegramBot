@@ -37,7 +37,7 @@ def generate(message: str, bot, chat_id, msg_id) -> str:
     if len(message) != 11:
         return "La liste doit contenir 11 coupes"
 
-    message = [int(element) for element in message]
+    message = [float(element) for element in message]
     for element in message:
         if not int(element) or element == 0 or element == '0':
             return "La liste doit contenir uniquement des chiffres : " + str(element)
