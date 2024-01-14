@@ -24,14 +24,14 @@ module cutter(cut, cut_index, position) {
             // do nothing already good shape
             }
         else{
-            // Cutting shape for the right side
-            rotate([0,0, cut * -disc_angle])
+            // Cutting shape for the left side
+            rotate([0,0, cut * -disc_angle-1])// i don't understand why -1 but for some reason i need it to align the discs to the left
             difference(){
                 cylinder(cut_size, d = key_thickness_x*2);
                 cube([key_thickness_y, sideLengthFromDiagonal(key_thickness_y), cut_size*2], center = true);
             }
-            // Cutting shape for the left side
-            rotate([0,0,90 - cut*disc_angle])
+            // Cutting shape for the right side
+            rotate([0,0,90 - cut*disc_angle+6]) // i don't understand why +6 but for some reason i need it to align the discs to the right
             difference(){
                 cylinder(cut_size, d = key_thickness_x*2);
                 cube([key_thickness_y, sideLengthFromDiagonal(key_thickness_y), cut_size*2], center = true);
@@ -49,8 +49,15 @@ module abloy_dislock_pro(list){
                 for (cut_index = [0 : len(list) - 1]) {
                     cut = list[cut_index];
                     // for each cut create a cut disc 2mm height
-                    position = [0, 0, -(initial_spacing + spacing * (cut_index + 1) + cut_size/2)];
+                    // if last disc go a bit deeper make the cut
+                    if (cut_index == len(list) - 1) {                    
+                        position = [0, 0, -(initial_spacing + spacing * (cut_index + 1) + cut_size/2) - 0.5];
                     cutter(cut, cut_index, position);
+                    }
+                    else{                    
+                        position = [0, 0, -(initial_spacing + spacing * (cut_index + 1) + cut_size/2)];
+                    cutter(cut, cut_index, position);
+                        }
                 }
             }
         }
@@ -58,4 +65,4 @@ module abloy_dislock_pro(list){
 }
 
 
-abloy_dislock_pro([0,1,2,3,4,5,6,0,5,4,3]);
+abloy_dislock_pro([0,5,3,5,3,1,2,0,2,6,4]);
