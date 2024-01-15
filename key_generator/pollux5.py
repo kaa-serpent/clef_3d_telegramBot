@@ -62,7 +62,7 @@ clef_pollux5({},{},{},{},{});'''.format(message[0], message[1], message[2],
         file.write(openscad_script)
 
     # Generate the key
-    subprocess.run([openscad_path, '-o', 'pollux5_file.stl', 'generate_pollux5.scad'])
+    subprocess.run([openscad_path, '-o', '-q', 'pollux5_file.stl', 'generate_pollux5.scad'])
 
     # if file name does not exist, there was an error during the generation
     if "pollux5_file.stl" not in os.listdir():
