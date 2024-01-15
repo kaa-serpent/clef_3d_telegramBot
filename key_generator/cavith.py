@@ -57,7 +57,7 @@ clef_cavith({},{},{},{},{});'''.format(message[0], message[1], message[2],
         file.write(openscad_script)
 
     # Generate the key
-    subprocess.run([openscad_path, '-o', 'cavith_file.stl', 'generate_cavith.scad'])
+    subprocess.run([openscad_path, '-o', '-q', 'cavith_file.stl', 'generate_cavith.scad'])
 
     # if file name does not exist, there was an error during the generation
     if "cavith_file.stl" not in os.listdir():

@@ -51,7 +51,7 @@ abloy_dislock_pro({});'''.format(message)
         os.remove("abloy_dislock_pro.stl")
 
     # Generate the key
-    subprocess.run([openscad_path, '-o', 'abloy_dislock_pro.stl', 'generate_abloy_dislock_pro.scad'])
+    subprocess.run([openscad_path, '-o', '-q', 'abloy_dislock_pro.stl', 'generate_abloy_dislock_pro.scad'])
 
     # if file name does not exist, there was an error during the generation
     if "abloy_dislock_pro.stl" not in os.listdir():
