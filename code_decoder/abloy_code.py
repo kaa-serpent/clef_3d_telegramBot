@@ -1,4 +1,9 @@
-from utils import utils
+# made by Clefmentine january 2024
+# I am not responsible for bad usage of this code, I shared it to prove a security flow in Abloy key copy system
+# you can visually decode a key and ask the factory to make a new oe proving the right number for the property card
+import json
+
+card = False
 
 
 def translate_cut_to_code(cut, table):
@@ -19,48 +24,53 @@ def translate_code_to_cut(code, table):
     return cut
 
 
-# Define the translation table
-translation_table = [
-    [3, 2, 9, 8, 1, 5, 6, 2, 2, 8],
-    [1, 4, 7, 2, 7, 2, 9, 1, 9, 0],
-    [5, 3, 6, 1, 5, 7, 1, 0, 8, 1],
-    [9, 5, 1, 7, 9, 4, 2, 8, 0, 7],
-    [2, 0, 5, 5, 3, 3, 4, 3, 5, 9],
-    [4, 8, 2, 6, 6, 1, 3, 4, 3, 3],
-    [7, 1, 3, 4, 2, 6, 8, 5, 1, 2]
-]
-
-# Example cut input
-cut_input = [6, 1, 2, 6, 5, 4, 0, 1, 3, 3]
-code_input = [7, 4, 6, 4, 6, 3, 6, 1, 0, 7]
+# Read the JSON data from the file
+with open("abloy/table.json", 'r') as json_file:
+    data = json.load(json_file)
+    translation_table = data['table']
 
 
 def decode(message: str, bot, chat_id, msg_id) -> str:
     if 'help' in message or '' in message:
         result = "Permet de passer du code de coupe au code de la carte de propiétée ou vise versa \n" \
                  "Ajouer `carte` à la suite permet de passer du code de la carte de propietée au code de coupe\n" \
-                 "ex:\n`/abloycode 6,1,2,6,5,4,0,1,3,3` \n `/abloycode 7,4,6,4,6,3,6,1,0,7,carte` \n\n"
+                 "ex:\n`/abloycode 6126540133` \n `/abloycode 7464636107 carte` \n\n"
         bot.telegram_bot_sendtext(result, chat_id, msg_id)
         # send picture of key cut
         return "code_decoder/abloy/disc_decode_final_font.png"
-    listmes = utils.clean_message(message)
-    # check len to check id code or cut
-    if len(listmes) == 11:
-        # code to cut
-        listmes.pop()
-        listmes = list(map(int, listmes))
-        resultlist = translate_code_to_cut(listmes, translation_table)
-        code = "Le code de coupe est : " + str(resultlist)
-    elif len(listmes) == 10:
-        # cut to code
-        listmes = list(map(int, listmes))
-        resultlist = translate_cut_to_code(listmes, translation_table)
-        code = "Le numéro de carte de propiétée est : " + str(resultlist)
+
+    message = message.replace(' ', '')
+
+    if 'carte' in message:
+        card = True
+        message = message.replace("carte", "")
+
+    message = list(message)
+
+    # check if the list contains 11
+    if len(message) == 11:
+        message = message.pop(0)
+        listmes = list(map(int, message))
+        if card:
+            resultlist = translate_cut_to_code(listmes, translation_table)
+            code = "Le numéro de carte de propiétée est : 0" + str(resultlist)
+        else:
+            resultlist = translate_code_to_cut(listmes, translation_table)
+            code = "Les coupes de la clef sont : 0" + str(resultlist)
+
     else:
         result = "Permet de passer du code de coupe au code de la carte de propiétée ou vise versa \n" \
                  "Ajouer `carte` à la suite permet de passer du code de la carte de propietée au code de coupe\n" \
-                 "ex:\n`/abloycode 6,1,2,6,5,4,0,1,3,3` \n `/abloycode 7,4,6,4,6,3,6,1,0,7,carte` \n\n"
+                 "ex:\n`/abloycode 6126540133` \n `/abloycode 7464636107 carte` \n\n"
         bot.telegram_bot_sendtext(result, chat_id, msg_id)
         # send picture of key cut
         return "code_decoder/abloy/disc_decode_final_font.png"
+
     return code
+
+
+if __name__ == "__main__":
+    # Example cut input
+    cut_input = [5, 3, 5, 3, 1, 2, 0, 2, 6, 4]
+    # code_input = [7, 4, 6, 4, 6, 3, 6, 1, 0, 7]
+    print(translate_cut_to_code(cut_input, translation_table))
