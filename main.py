@@ -143,7 +143,7 @@ def chatbot():
                     elif '/abloycode' in text:
                         result = abloy_code.decode(text.replace("/abloycode", ""), bot, chat_id, msg_id)
                         if result == "code_decoder/abloy/disc_decode_final_font.png":
-                            bot.telegram_bot_sendimage("code_decoder/abloy/disc_decode_final_font.png", chat_id, msg_id)
+                            bot.telegram_bot_sendimage("code_decoder/abloy/pics/disc_decode_final_font.png", chat_id, msg_id)
                         else:
                             bot.telegram_bot_sendtext(result, chat_id, msg_id)
 

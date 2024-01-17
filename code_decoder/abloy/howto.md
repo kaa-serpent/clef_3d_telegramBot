@@ -17,10 +17,10 @@ This project, made by Clefmentine in January 2024, involves visually decoding a 
     - Protect / protect 2
         
         decoding charts made by Reinder Stegen
-        ![discs](disc_decode_final_font.png)
-        ![cuts](protec_key_decode.png)
+        ![discs](pics/disc_decode_final_font.png)
+        ![cuts](pics/protec_key_decode.png)
     - Dislock / Dislock
-        ![Alt dislock](abloy_dislock.jpg)
+        ![Alt dislock](pics/abloy_dislock.jpg)
     - Other not yet documented
    
 
