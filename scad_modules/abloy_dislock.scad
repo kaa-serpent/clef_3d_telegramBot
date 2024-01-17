@@ -1,3 +1,7 @@
+// Created by Clefmentine january 2024
+// I am not responsible for any bad usage of this code
+// this is to show a proof that abloy key can be easilly made from a 3d printer
+
 $fn = 100;
 
 cut_size = 2; // size of the cut on the key
@@ -17,7 +21,7 @@ module cutter(cut, cut_index, position) {
         if (cut == 6) {
             difference(){
                 cylinder(cut_size, d = key_thickness_y*2);
-                cylinder(cut_size*2, d = key_thickness_y*0.65);
+                cylinder(cut_size*2, d = key_thickness_y*0.7);
             }
         }
         else if (cut == 0){
@@ -50,9 +54,11 @@ module abloy_dislock_pro(list){
                     cut = list[cut_index];
                     // for each cut create a cut disc 2mm height
                     // if last disc go a bit deeper make the cut
-                    if (cut_index == len(list) - 1) {                    
-                        position = [0, 0, -(initial_spacing + spacing * (cut_index + 1) + cut_size/2) - 0.5];
-                    cutter(cut, cut_index, position);
+                    if (cut_index == len(list) - 1) {            
+                        position = [0, 0, -(initial_spacing + spacing * (cut_index + 1) + cut_size/2)];
+                    cutter(cut, cut_index, position);                  
+                        position2 = [0, 0, -(initial_spacing + spacing * (cut_index + 1) + cut_size/2) - 0.6];
+                    cutter(cut, cut_index, position2);
                     }
                     else{                    
                         position = [0, 0, -(initial_spacing + spacing * (cut_index + 1) + cut_size/2)];
