@@ -10,7 +10,7 @@ For example, if a user desires a key with the cut "3,5,6,3,1," they would send t
 The moment the command is sent, the Clef 3D TelegramBot springs into action. Leveraging advanced algorithms and intricate design patterns, the bot rapidly generates a precise 3D model of the requested key. Once the generation process is complete, the bot promptly sends the stunning 3D representation of the key back to the user within the same Telegram discussion.
 
 ### Key available
-
+#### PUMP
 - [x] dynaxis
 - [x] fontaine 5
 - [x] pollux
@@ -18,7 +18,9 @@ The moment the command is sent, the Clef 3D TelegramBot springs into action. Lev
   - [x] pollux 7
 - [ ] Laperche Rols
 - [ ] Cavers Cavith
-
+####
+- [x] Disclock
+- [x] Disclock Pro
 
 I am curently working on this feel free to send key request.
 
